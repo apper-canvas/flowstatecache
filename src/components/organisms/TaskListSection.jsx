@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ApperIcon from '@/components/ApperIcon';
 import TaskCard from '@/components/molecules/TaskCard';
 
-const TaskListSection = ({ title, iconName, tasks, onCompleteTask, onDeleteTask, focusedTask, onTaskFocusToggle }) => {
+const TaskListSection = ({ title, iconName, tasks, onCompleteTask, onEditTask, onDeleteTask, focusedTask, onTaskFocusToggle }) => {
     if (!tasks || tasks.length === 0) {
         return null;
     }
@@ -31,6 +31,7 @@ const TaskListSection = ({ title, iconName, tasks, onCompleteTask, onDeleteTask,
                             task={task}
                             index={index}
                             onComplete={onCompleteTask}
+                            onEdit={onEditTask}
                             onDelete={onDeleteTask}
                             focusedTask={focusedTask}
                             onToggleFocus={onTaskFocusToggle}

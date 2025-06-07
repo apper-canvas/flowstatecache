@@ -7,11 +7,11 @@ import listService from '@/services/api/listService';
 import Header from '@/components/organisms/Header';
 import QuickCaptureBar from '@/components/organisms/QuickCaptureBar';
 import TaskListSection from '@/components/organisms/TaskListSection';
+import TaskEditModal from '@/components/organisms/TaskEditModal';
 import ProgressRiver from '@/components/organisms/ProgressRiver';
 import EmptyState from '@/components/organisms/EmptyState';
 import ErrorState from '@/components/organisms/ErrorState';
 import LoadingSkeleton from '@/components/molecules/LoadingSkeleton';
-
 const HomePage = () => {
     const [tasks, setTasks] = useState([]);
     const [lists, setLists] = useState([]); // lists state is not used in UI but kept for functionality preservation
@@ -22,7 +22,10 @@ const HomePage = () => {
     const [isCapturing, setIsCapturing] = useState(false);
     const [focusedTask, setFocusedTask] = useState(null);
     const [darkMode, setDarkMode] = useState(false);
-
+    
+    // Edit modal state
+    const [editingTask, setEditingTask] = useState(null);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     useEffect(() => {
         loadData();
     }, []);
@@ -95,12 +98,34 @@ const HomePage = () => {
         } catch (err) {
             toast.error('Failed to delete task');
         }
+};
+
+    const handleEditTask = (task) => {
+        setEditingTask(task);
+        setIsEditModalOpen(true);
+    };
+
+    const handleSaveTask = async (taskId, updates) => {
+        try {
+            const updatedTask = await taskService.update(taskId, updates);
+            setTasks(prev => prev.map(task => 
+                task.id === taskId ? updatedTask : task
+            ));
+            setIsEditModalOpen(false);
+            setEditingTask(null);
+        } catch (error) {
+            throw error; // Re-throw to let modal handle the error
+        }
+    };
+
+    const handleCloseEditModal = () => {
+        setIsEditModalOpen(false);
+        setEditingTask(null);
     };
 
     const handleToggleTaskFocus = (taskId) => {
         setFocusedTask(focusedTask === taskId ? null : taskId);
     };
-
     const pendingTasks = tasks.filter(task => task.status !== 'completed');
     const completedTasks = tasks.filter(task => task.status === 'completed');
 
@@ -137,23 +162,24 @@ const HomePage = () => {
                     <ErrorState errorMessage={error} onRetry={loadData} />
                 ) : tasks.length === 0 ? (
                     <EmptyState onCreateTaskClick={() => document.getElementById('quick-capture')?.focus()} />
-                ) : (
+) : (
                     <div className="space-y-8">
                         <TaskListSection
                             title="Active Flow"
                             iconName="Zap"
                             tasks={pendingTasks}
                             onCompleteTask={handleCompleteTask}
+                            onEditTask={handleEditTask}
                             onDeleteTask={handleDeleteTask}
                             focusedTask={focusedTask}
                             onTaskFocusToggle={handleToggleTaskFocus}
                         />
-
                         <TaskListSection
                             title="Completed Flow"
                             iconName="CheckCircle"
                             tasks={completedTasks}
                             onCompleteTask={handleCompleteTask}
+                            onEditTask={handleEditTask}
                             onDeleteTask={handleDeleteTask}
                             focusedTask={focusedTask}
                             onTaskFocusToggle={handleToggleTaskFocus}
@@ -166,8 +192,14 @@ const HomePage = () => {
                 completedTasksCount={completedTasks.length}
                 totalTasksCount={tasks.length}
             />
+            {/* Edit Modal */}
+            <TaskEditModal
+                task={editingTask}
+                isOpen={isEditModalOpen}
+                onClose={handleCloseEditModal}
+                onSave={handleSaveTask}
+                onDelete={handleDeleteTask}
+            />
         </motion.div>
-    );
-};
 
 export default HomePage;

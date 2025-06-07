@@ -20,7 +20,7 @@ const getStatusIcon = (status) => {
     }
 };
 
-const TaskCard = ({ task, index, onComplete, onDelete, focusedTask, onToggleFocus }) => {
+const TaskCard = ({ task, index, onComplete, onEdit, onDelete, focusedTask, onToggleFocus }) => {
     const isFocused = focusedTask === task.id;
 
     return (
@@ -81,19 +81,34 @@ const TaskCard = ({ task, index, onComplete, onDelete, focusedTask, onToggleFocu
                         )}
                     </div>
                 </div>
+</div>
                 
-                <Button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        onDelete(task.id);
-                    }}
-                    className="opacity-0 group-hover:opacity-100 p-2 text-gray-400 hover:text-red-500 transition-all duration-300"
-                >
-                    <ApperIcon name="X" size={16} />
-                </Button>
-            </div>
+                <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                    <Button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onEdit(task);
+                        }}
+                        className="p-2 text-gray-400 hover:text-primary transition-all duration-300"
+                        title="Edit task"
+                    >
+                        <ApperIcon name="Edit3" size={16} />
+                    </Button>
+                    <Button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onDelete(task.id);
+                        }}
+                        className="p-2 text-gray-400 hover:text-red-500 transition-all duration-300"
+                        title="Delete task"
+                    >
+                        <ApperIcon name="X" size={16} />
+                    </Button>
+                </div>
             
             {isFocused && (
                 <motion.div
