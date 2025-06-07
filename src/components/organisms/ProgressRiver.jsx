@@ -1,9 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import ApperIcon from '@/components/ApperIcon';
+import ApperIcon from '../ApperIcon';
 
-const ProgressRiver = ({ completedTasksCount, totalTasksCount }) => {
-    if (completedTasksCount === 0 &amp;&amp; totalTasksCount === 0) {
+const ProgressRiver = ({ completedTasksCount = 0, totalTasksCount = 0 }) => {
+    // Return null if no tasks to show
+    if (completedTasksCount === 0 && totalTasksCount === 0) {
         return null;
     }
 
