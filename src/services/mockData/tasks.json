@@ -1,0 +1,62 @@
+[
+  {
+    "id": "1",
+    "title": "Review quarterly marketing strategy",
+    "description": "Analyze Q3 performance metrics and plan Q4 campaign initiatives focusing on digital transformation and customer engagement.",
+    "status": "pending",
+    "energyLevel": "high",
+    "optimalTime": "morning",
+    "connections": ["2", "5"],
+    "createdAt": "2024-01-15T09:30:00Z",
+    "completedAt": null,
+    "priority": 3
+  },
+  {
+    "id": "2",
+    "title": "Prepare presentation for client meeting",
+    "description": "Create comprehensive slide deck showcasing our proposed solution for the enterprise software integration project.",
+    "status": "in-progress",
+    "energyLevel": "medium",
+    "optimalTime": "afternoon",
+    "connections": ["1"],
+    "createdAt": "2024-01-15T11:15:00Z",
+    "completedAt": null,
+    "priority": 2
+  },
+  {
+    "id": "3",
+    "title": "Update project documentation",
+    "description": "Revise technical specifications and user manuals to reflect recent feature updates and system improvements.",
+    "status": "pending",
+    "energyLevel": "low",
+    "optimalTime": "afternoon",
+    "connections": [],
+    "createdAt": "2024-01-15T14:20:00Z",
+    "completedAt": null,
+    "priority": 1
+  },
+  {
+    "id": "4",
+    "title": "Team retrospective meeting",
+    "description": "Facilitate bi-weekly retrospective to discuss project progress, challenges, and process improvements with the development team.",
+    "status": "completed",
+    "energyLevel": "medium",
+    "optimalTime": "morning",
+    "connections": [],
+    "createdAt": "2024-01-14T08:00:00Z",
+    "completedAt": "2024-01-14T10:30:00Z",
+    "priority": 2
+  },
+  {
+    "id": "5",
+    "title": "Research competitor analysis",
+    "description": "Conduct thorough market research on main competitors' pricing strategies, feature sets, and customer satisfaction metrics.",
+    "status": "pending",
+    "energyLevel": "high",
+    "optimalTime": "morning",
+    "connections": ["1"],
+    "createdAt": "2024-01-15T16:45:00Z",
+    "completedAt": null,
+    "priority": 2
+  }
+]

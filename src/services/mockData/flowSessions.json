@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "startTime": "2024-01-15T09:00:00Z",
+    "endTime": "2024-01-15T11:30:00Z",
+    "tasksCompleted": ["4"],
+    "focusScore": 85
+  },
+  {
+    "id": "2",
+    "startTime": "2024-01-14T14:00:00Z",
+    "endTime": "2024-01-14T16:45:00Z",
+    "tasksCompleted": [],
+    "focusScore": 72
+  },
+  {
+    "id": "3",
+    "startTime": "2024-01-13T10:30:00Z",
+    "endTime": "2024-01-13T12:15:00Z",
+    "tasksCompleted": [],
+    "focusScore": 91
+  }
+]
